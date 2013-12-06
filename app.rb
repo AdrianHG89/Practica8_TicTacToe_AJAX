@@ -1,7 +1,8 @@
+require 'rubygems'
+require 'haml'
 require 'sinatra'
 require 'sass'
 require 'pp'
-require 'haml'
 require './usuarios.rb'
 
 settings.port = ENV['PORT'] || 4567
@@ -139,6 +140,10 @@ end
 
 helpers TicTacToe
 
+get '/' do
+  session["bs"] = inicializa()
+  haml :game, :locals => { :b => board, :m => '' }
+end
 #########################################################################################
 # Para cada una de las jugadas dependiendo de donde pulsemos de ahi el expresion regular.
 #########################################################################################
@@ -151,20 +156,21 @@ get %r{^/([abc][123])?$} do |human|
       board[human] = TicTacToe::CIRCLE
       # computer = board.legal_moves.sample
       computer = smart_move
-      redirect to ('/humanwins') if human_wins?
-      redirect to('/tie') unless computer
+      return ('/humanwins') if human_wins?
+      return ('/tie') unless computer
       board[computer] = TicTacToe::CROSS
       puts "I played: #{computer}!"
       puts "Tablero:  #{board.inspect}"
-      redirect to ('/computerwins') if computer_wins?
+      return ('/computerwins') if computer_wins?
     end
   else
     session["bs"] = inicializa()
     puts "session = "
     pp session
+    result = "illegal"
   end
-  
-  haml :game, :locals => { :b => board, :m => '' }
+  result
+  #haml :game, :locals => { :b => board, :m => '' }
 end
 ###########################################
 # La llamada que se produce cuando ganamos.
