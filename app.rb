@@ -162,6 +162,7 @@ get %r{^/([abc][123])?$} do |human|
       puts "I played: #{computer}!"
       puts "Tablero:  #{board.inspect}"
       return ('/computerwins') if computer_wins?
+      result = computer
     end
   else
     session["bs"] = inicializa()
