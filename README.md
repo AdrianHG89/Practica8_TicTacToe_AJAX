@@ -33,7 +33,7 @@ Instalaremos las gemas necesarias: bundle install o rake install
 4. Heroku
 ------------
 
-	http://tic-tac-toe-stw1314.herokuapp.com/
+	http://tresenraya-stw1314.herokuapp.com/
 ![](http://i1296.photobucket.com/albums/ag1/adrihg89/heroku3_zps5cc6ffd8.png)
 
 5.Desarrollador
